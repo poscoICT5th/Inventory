@@ -15,7 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import Pack.service.InventoryService;
 import Pack.service.TestService;
-import Pack.vo.InventoryLocation;
+import Pack.vo.InventoryCustomer;
+import Pack.vo.InventoryItemname;
 import Pack.vo.InventorySch;
 import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
@@ -69,11 +70,19 @@ public class MainController {
 	}
 	
 	@GetMapping("/inventory/{location}")
-	public List inventoryLoc(@PathVariable("location") String location) {
-		System.out.println("inventoryLocation");
-		List<InventoryLocation> inventoryLocation = inventoryService.selectLocation(location);
-		System.out.println(inventoryLocation.size());
-		return inventoryLocation;
+	public List inventoryItemname(@PathVariable("location") String location) {
+		System.out.println("inventoryItemnameLocation");
+		List<InventoryItemname> inventoryItemname = inventoryService.selectItemname(location);
+		System.out.println(inventoryItemname.size());
+		return inventoryItemname;
+	}
+	
+	@GetMapping("/inventory/customer/{location}")
+	public List inventoryCustomer(@PathVariable("location") String location) {
+		System.out.println("inventoryCustomerLocation");
+		List<InventoryCustomer> inventoryCustomer = inventoryService.selectCustomer(location);
+		System.out.println(inventoryCustomer.size());
+		return inventoryCustomer;
 	}
 	
 	@DeleteMapping("/{lotNo}")

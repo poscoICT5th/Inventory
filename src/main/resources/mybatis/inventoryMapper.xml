@@ -37,8 +37,14 @@
 		WHERE warehouse_code = #{warehouse_code}
 	</select>
 	
-    <select id="selectLocation"  resultType="Pack.vo.InventoryLocation">
+    <select id="selectItemname"  resultType="Pack.vo.InventoryItemname">
 		SELECT item_name
+		FROM Inventory
+		WHERE location = #{location}
+	</select>
+	
+    <select id="selectCustomer"  resultType="Pack.vo.InventoryCustomer">
+		SELECT customer
 		FROM Inventory
 		WHERE location = #{location}
 	</select>
