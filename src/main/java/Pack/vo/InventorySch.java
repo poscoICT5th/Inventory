@@ -9,7 +9,6 @@ import lombok.ToString;
 @Setter
 public class InventorySch {
 	String industry_family;
-	String target;
 	String stock_type;
 	String stock_quality_status;
 	String status_cause;
@@ -36,6 +35,4 @@ public class InventorySch {
 	float max_height;
 	String inventory_date;
 	String warehouse_date;
-	int min_warehouse_aging;
-	int max_warehouse_aging;
 }
