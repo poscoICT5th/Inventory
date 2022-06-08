@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Pack.mapper.InventoryMapper;
+import Pack.vo.InventoryDTO;
 import Pack.vo.InventoryLocation;
 import Pack.vo.InventorySch;
 import Pack.vo.InventoryUpd;
@@ -42,4 +43,12 @@ public class InventoryService {
     	System.out.println(inventoryUpd);
     	return mapper.update(inventoryUpd);
     }
+
+	public int insert(InventoryDTO inventoryDTO) {
+		return mapper.insert(inventoryDTO);
+	}
+
+	public int inventoryUpd(InventoryDTO inventoryDTO) {
+		return mapper.update(inventoryDTO);
+	}
 }

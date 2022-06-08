@@ -2,41 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Pack.mapper.InventoryMapper">
 	<select id="selectAll"  resultType="Pack.vo.InventoryVo">
-		SELECT * FROM Inventory
+		select *, datediff(now(), warehouse_date) as warehouse_aging from Inventory;
 	</select>
 	
 	<select id="selectSome" parameterType="Pack.vo.InventorySch" resultType="Pack.vo.InventoryVo">
-     	SELECT *
-    	FROM Inventory
+     	select *, datediff(now(), warehouse_date) as warehouse_aging from Inventory
     	WHERE
-    		<if test='industry_family != null and industry_family neq ""'>industry_family=#{industry_family} and</if>
-    		<if test='target != null and target neq ""'>target=#{target} and</if>
-    		<if test='stock_type != null and stock_type neq ""'>stock_type=#{stock_type} and</if>
-    		<if test='stock_quality_status != null and stock_quality_status neq ""'>stock_quality_status=#{stock_quality_status} and</if>
-    		<if test='status_cause != null and status_cause neq ""'>status_cause=#{status_cause} and</if>
-    		<if test='location != null and location neq ""'>location=#{location} and</if>
-    		<if test='product_family != null and product_family neq ""'>product_family=#{product_family} and</if>
-    		<if test='warehouse_code != null and warehouse_code neq ""'>warehouse_code=#{warehouse_code} and</if>
-    		<if test='lot_no != null and lot_no neq ""'>lot_no=#{lot_no} and</if>
-    		<if test='item_num != null and item_num neq ""'>item_num=#{item_num} and</if>
-    		<if test='item_desc != null and item_desc neq ""'>item_desc=#{item_desc} and</if>
-    		<if test='item_name != null and item_name neq ""'>item_name=#{item_name} and</if>
-    		<if test='unit != null and unit neq ""'>unit=#{unit} and</if>
-    		<if test='customer != null and customer neq ""'>customer=#{customer} and</if>
-    		<if test='inventory_date != null and inventory_date neq ""'>inventory_date=#{inventory_date} and</if>
-    		<if test='warehouse_date != null and warehouse_date neq ""'>warehouse_date=#{warehouse_date} and</if>
+    		<if test='industry_family != null and industry_family neq "전체보기"'>industry_family=#{industry_family} and</if>
+    		<if test='stock_type != null and stock_type neq "전체보기"'>stock_type=#{stock_type} and</if>
+    		<if test='stock_quality_status != null and stock_quality_status neq "전체보기"'>stock_quality_status=#{stock_quality_status} and</if>
+    		<if test='status_cause != null and status_cause neq "전체보기"'>status_cause=#{status_cause} and</if>
+    		<if test='location != null and location neq "전체보기"'>location=#{location} and</if>
+    		<if test='product_family != null and product_family neq "전체보기"'>product_family=#{product_family} and</if>
+    		<if test='warehouse_code != null and warehouse_code neq "전체보기"'>warehouse_code=#{warehouse_code} and</if>
+    		<if test='lot_no != null and lot_no neq "전체보기"'>lot_no=#{lot_no} and</if>
+    		<if test='item_num != null and item_num neq "전체보기"'>item_num=#{item_num} and</if>
+    		<if test='item_desc != null and item_desc neq "전체보기"'>item_desc=#{item_desc} and</if>
+    		<if test='item_name != null and item_name neq "전체보기"'>item_name=#{item_name} and</if>
+    		<if test='unit != null and unit neq "전체보기"'>unit=#{unit} and</if>
+    		<if test='customer != null and customer neq "전체보기"'>customer=#{customer} and</if>
+    		<if test='inventory_date != null and inventory_date neq "전체보기"'>inventory_date=#{inventory_date} and</if>
+    		<if test='warehouse_date != null and warehouse_date neq "전체보기"'>warehouse_date=#{warehouse_date} and</if>
 	    	(amount between #{min_amount} and #{max_amount}) and
 	    	(weight between #{min_weight} and #{max_weight}) and
 	    	(fixed_month between #{min_fixed_month} and #{max_fixed_month}) and
 	    	(width between #{min_width} and #{max_width}) and
 	    	(thickness between #{min_thickness} and #{max_thickness}) and
-	    	(height between #{min_height} and #{max_height}) and
-	    	(warehouse_aging between #{min_warehouse_aging} and #{max_warehouse_aging})
+	    	(height between #{min_height} and #{max_height});
     </select>
     
     <select id="selectWarehouse"  resultType="Pack.vo.InventoryWarehouse">
-		SELECT * 
-		FROM Inventory
+		select *, datediff(now(), warehouse_date) as warehouse_aging 
+		from Inventory
 		WHERE warehouse_code = #{warehouse_code}
 	</select>
 	
@@ -55,15 +52,14 @@
     	UPDATE Inventory
     	SET
     		industry_family = #{industry_family},
-			target = #{target},
 			stock_type = #{stock_type},
 			stock_quality_status = #{stock_quality_status},
 			status_cause = #{status_cause},
 			location = #{location},
 			product_family = #{product_family},
 			warehouse_code = #{warehouse_code},
-			Item_num = #{Item_num},
-			Item_desc = #{Item_desc},
+			item_num = #{item_num},
+			item_desc = #{item_desc},
 			item_name = #{item_name},
 			amount = #{amount},
 			weight = #{weight},
@@ -74,9 +70,36 @@
 			thickness = #{thickness},
 			height = #{height},
 			inventory_date = #{inventory_date},
-			warehouse_date = #{warehouse_date},
-			warehouse_aging = #{warehouse_aging}
+			warehouse_date = #{warehouse_date}
     	WHERE
     		lot_no = #{lot_no}
     </update>
+    
+    <insert id="insert" parameterType="InventoryDTO">
+	    INSERT
+        INTO Inventory 
+        VALUES (
+        	#{industry_family},
+        	NULL,
+        	NULL,
+        	NULL,
+        	#{location},
+        	#{product_family},
+        	#{warehouse_code},
+        	#{lot_no},
+        	#{item_num},
+        	#{item_desc},
+        	#{item_name},
+        	#{amount},
+        	#{weight},
+        	#{unit},
+        	#{customer},
+        	#{fixed_month},
+        	#{width},
+        	#{thickness},
+        	#{height},
+        	date_format(now(), "%Y-%m-%d"),
+        	date_format(now(), "%Y-%m-%d")
+        );
+    </insert>
 </mapper>

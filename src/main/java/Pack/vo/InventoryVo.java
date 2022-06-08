@@ -9,7 +9,6 @@ import lombok.ToString;
 @Setter
 public class InventoryVo {
 	String industry_family;
-	String target;
 	String stock_type;
 	String stock_quality_status;
 	String status_cause;
