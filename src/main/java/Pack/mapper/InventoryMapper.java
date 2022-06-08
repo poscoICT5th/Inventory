@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import Pack.vo.InventoryCustomer;
 import Pack.vo.InventoryItemname;
+import Pack.vo.InventoryDTO;
+import Pack.vo.InventoryLocation;
 import Pack.vo.InventorySch;
 import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
@@ -28,4 +30,9 @@ public interface InventoryMapper {
     int delete(String lotNo);
     
     int update(InventoryUpd inventoryUpd);
+
+    int update(InventoryDTO inventoryDTO);
+
+    int insert(InventoryDTO inventoryDTO);
+
 }

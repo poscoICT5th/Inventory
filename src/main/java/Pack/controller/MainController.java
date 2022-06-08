@@ -29,6 +29,7 @@ import Pack.vo.TestVo;
 public class MainController {
 	@Autowired
 	InventoryService inventoryService;
+	@Autowired
 	TestService testService;
 
 	@GetMapping("/test")
