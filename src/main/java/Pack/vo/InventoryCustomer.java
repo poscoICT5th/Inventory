@@ -7,6 +7,6 @@ import lombok.ToString;
 @ToString 
 @Getter
 @Setter
-public class InventoryItemname {
-	String item_name;
+public class InventoryCustomer {
+	String customer;
 }
