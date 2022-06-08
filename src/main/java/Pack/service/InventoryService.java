@@ -9,7 +9,6 @@ import Pack.mapper.InventoryMapper;
 import Pack.vo.InventoryCustomer;
 import Pack.vo.InventoryItemname;
 import Pack.vo.InventoryDTO;
-import Pack.vo.InventoryLocation;
 import Pack.vo.InventorySch;
 import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
