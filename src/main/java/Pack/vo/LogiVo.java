@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString 
 @Getter
 @Setter
-public class LogiImportVo {
+public class LogiVo {
 	String status;
 	String industry_family;
 	String location;
@@ -35,5 +35,12 @@ public class LogiImportVo {
 	String order_date;
 	String inst_reg_date;
 	String inst_deadline;
-	String done_date;	
+	String done_date;
+	// 출고 컬럼
+	int ex_amount;
+	int ex_remain;
+	// 이동 컬럼
+	int move_amount;
+	String from_warehouse;
+	
 }

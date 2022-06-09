@@ -25,8 +25,6 @@ public class InventorySch {
 	float max_weight;
 	String unit;
 	String customer;
-	int min_fixed_month;
-	int max_fixed_month;
 	float min_width;
 	float max_width;
 	float min_thickness;

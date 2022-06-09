@@ -28,22 +28,22 @@ public class InventoryDTO {
 	String inventory_date; //
 	String warehouse_date; //
 	
-	public InventoryDTO(LogiImportVo logiImportVo) {
-		this.industry_family = logiImportVo.getIndustry_family();
-		this.location = logiImportVo.getLocation();
-		this.product_family = logiImportVo.getProduct_family();
-		this.warehouse_code = logiImportVo.getTo_warehouse();
-		this.lot_no = logiImportVo.getLot_no();
-		this.item_num = logiImportVo.getItem_no();
+	public InventoryDTO(LogiVo logiVo) {
+		this.industry_family = logiVo.getIndustry_family();
+		this.location = logiVo.getLocation();
+		this.product_family = logiVo.getProduct_family();
+		this.warehouse_code = logiVo.getTo_warehouse();
+		this.lot_no = logiVo.getLot_no();
+		this.item_num = logiVo.getItem_no();
 		this.item_desc = "";
-		this.item_name = logiImportVo.getItem_name();
-		this.amount = logiImportVo.getAmount();
-		this.weight = logiImportVo.getWeight();
-		this.unit = logiImportVo.getUnit();
-		this.customer = logiImportVo.getCustomer();
+		this.item_name = logiVo.getItem_name();
+		this.amount = logiVo.getAmount();
+		this.weight = logiVo.getWeight();
+		this.unit = logiVo.getUnit();
+		this.customer = logiVo.getCustomer();
 		this.fixed_month = 0;
-		this.width = logiImportVo.getWidth();
-		this.thickness = logiImportVo.getThickness();
-		this.height = logiImportVo.getHeight();
+		this.width = logiVo.getWidth();
+		this.thickness = logiVo.getThickness();
+		this.height = logiVo.getHeight();
 	}
 }

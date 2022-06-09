@@ -2,11 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Pack.mapper.InventoryMapper">
 	<select id="selectAll"  resultType="Pack.vo.InventoryVo">
-		select *, datediff(now(), warehouse_date) as warehouse_aging from Inventory;
+		select *, TIMESTAMPDIFF(MONTH, warehouse_date, now()) as fixed_month, datediff(now(), inventory_date) as warehouse_aging 
+		from Inventory;
+	</select>
+	
+	<select id="selectByLotNo" parameterType="String" resultType="InventoryVo">
+		select *, TIMESTAMPDIFF(MONTH, warehouse_date, now()) as fixed_month, datediff(now(), inventory_date) as warehouse_aging 
+		from Inventory
+		where lot_no=#{lot_no}
 	</select>
 	
 	<select id="selectSome" parameterType="Pack.vo.InventorySch" resultType="Pack.vo.InventoryVo">
-     	select *, datediff(now(), warehouse_date) as warehouse_aging from Inventory
+     	select *, TIMESTAMPDIFF(MONTH, warehouse_date, now()) as fixed_month, datediff(now(), inventory_date) as warehouse_aging
+     	from Inventory
     	WHERE
     		<if test='industry_family != null and industry_family neq "전체보기"'>industry_family=#{industry_family} and</if>
     		<if test='stock_type != null and stock_type neq "전체보기"'>stock_type=#{stock_type} and</if>
@@ -25,14 +33,13 @@
     		<if test='warehouse_date != null and warehouse_date neq "전체보기"'>warehouse_date=#{warehouse_date} and</if>
 	    	(amount between #{min_amount} and #{max_amount}) and
 	    	(weight between #{min_weight} and #{max_weight}) and
-	    	(fixed_month between #{min_fixed_month} and #{max_fixed_month}) and
 	    	(width between #{min_width} and #{max_width}) and
 	    	(thickness between #{min_thickness} and #{max_thickness}) and
 	    	(height between #{min_height} and #{max_height});
     </select>
     
     <select id="selectWarehouse"  resultType="Pack.vo.InventoryWarehouse">
-		select *, datediff(now(), warehouse_date) as warehouse_aging 
+		select *, TIMESTAMPDIFF(MONTH, warehouse_date, now()) as fixed_month, datediff(now(), inventory_date) as warehouse_aging 
 		from Inventory
 		WHERE warehouse_code = #{warehouse_code}
 	</select>
@@ -50,7 +57,8 @@
 	</select>
 	
     <delete id="delete" parameterType="String">
-    	DELETE FROM Inventory 
+    	DELETE 
+    	FROM Inventory 
     	WHERE lot_no = #{lot_no}
     </delete>
     
@@ -71,7 +79,6 @@
 			weight = #{weight},
 			unit = #{unit},
 			customer = #{customer},
-			fixed_month = #{fixed_month},
 			width = #{width},
 			thickness = #{thickness},
 			height = #{height},
@@ -100,7 +107,6 @@
         	#{weight},
         	#{unit},
         	#{customer},
-        	#{fixed_month},
         	#{width},
         	#{thickness},
         	#{height},
@@ -108,4 +114,23 @@
         	date_format(now(), "%Y-%m-%d")
         );
     </insert>
+    
+    <update id='reduce' parameterType="LogiVo">
+    	UPDATE Inventory
+    	SET
+			amount = (amount-#{ex_amount})
+    	WHERE
+    		lot_no = #{lot_no}
+    </update>
+        
+    <update id='move' parameterType="LogiVo">
+    	UPDATE Inventory
+    	SET
+			warehouse_code = #{to_warehouse},
+			warehouse_date = now()
+    	WHERE
+    		lot_no = #{lot_no}
+    </update>
+    
+    
 </mapper>

@@ -13,6 +13,7 @@ import Pack.vo.InventorySch;
 import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
 import Pack.vo.InventoryWarehouse;
+import Pack.vo.LogiVo;
 
 @Service
 public class InventoryService {
@@ -53,7 +54,15 @@ public class InventoryService {
 		return mapper.insert(inventoryDTO);
 	}
 
-	public int inventoryUpd(InventoryDTO inventoryDTO) {
-		return mapper.update(inventoryDTO);
+	public InventoryVo selectByLotNo(String lot_no) {
+		return mapper.selectByLotNo(lot_no);
+	}
+
+	public int reduce(LogiVo logiVo) {
+		return mapper.reduce(logiVo);
+	}
+
+	public int move(LogiVo logiVo) {
+		return mapper.move(logiVo);
 	}
 }

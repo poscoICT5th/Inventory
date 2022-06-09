@@ -12,6 +12,7 @@ import Pack.vo.InventorySch;
 import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
 import Pack.vo.InventoryWarehouse;
+import Pack.vo.LogiVo;
 
 @Repository
 @Mapper
@@ -30,8 +31,12 @@ public interface InventoryMapper {
     
     int update(InventoryUpd inventoryUpd);
 
-    int update(InventoryDTO inventoryDTO);
-
     int insert(InventoryDTO inventoryDTO);
+
+	InventoryVo selectByLotNo(String lot_no);
+
+	int reduce(LogiVo logiVo);
+
+	int move(LogiVo logiVo);
 
 }
