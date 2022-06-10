@@ -45,13 +45,13 @@
 	</select>
 	
     <select id="selectItemname"  resultType="Pack.vo.InventoryItemname">
-		SELECT item_name
+		SELECT distinct item_name
 		FROM Inventory
 		WHERE location = #{location}
 	</select>
 	
     <select id="selectCustomer"  resultType="Pack.vo.InventoryCustomer">
-		SELECT customer
+		SELECT distinct customer
 		FROM Inventory
 		WHERE location = #{location}
 	</select>
