@@ -55,7 +55,14 @@
 		FROM Inventory
 		WHERE location = #{location}
 	</select>
-	
+		
+    <select id="selectByLocAndWare" parameterType="HashMap" resultType="Pack.vo.InventoryVo">
+		select *, TIMESTAMPDIFF(MONTH, warehouse_date, now()) as fixed_month, datediff(now(), inventory_date) as warehouse_aging
+		FROM Inventory
+		WHERE location = #{location} and
+		warehouse_code = #{warehouseCode}
+	</select>
+		
     <delete id="delete" parameterType="String">
     	DELETE
     	FROM Inventory

@@ -93,7 +93,14 @@ public class MainController {
 		HashMap result = inventoryService.selectToMap();
 		return result;
 	}
-	
+
+	@GetMapping("/location/{location}/warehouse/{warehouseCode}")	
+	public List<InventoryVo> selectByLocAndWare(@PathVariable String location, @PathVariable String warehouseCode) {
+		System.out.println(location + " 지역의 " + warehouseCode + " 창고 데이터 요청");
+		List<InventoryVo> result = inventoryService.selectByLocAndWare(location, warehouseCode);
+		return result;
+	}
+
 	@DeleteMapping("/{lotNo}")
 	public boolean warehouseDel(@PathVariable("lotNo") String lotNo) {
 		System.out.println(lotNo);

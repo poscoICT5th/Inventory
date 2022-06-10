@@ -1,6 +1,5 @@
 package Pack.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -76,31 +75,32 @@ public class InventoryService {
 			HashMap<String, Object> locationMap = new HashMap<>();
 			HashMap<String, Object> wareMap = new HashMap<>();
 			HashMap<String, Object> lotNoMap = new HashMap<>();
+			lotNoMap.put("재고량", inventoryVo.getAmount());
+			lotNoMap.put("제품명", inventoryVo.getItem_name());
 			if (result.containsKey(inventoryVo.getLocation())) {
 				HashMap<String, Object> tempLocationMap = result.get(inventoryVo.getLocation());
 				if (tempLocationMap.containsKey(inventoryVo.getWarehouse_code())) {
 					HashMap<String, Object> tempWareMap = (HashMap<String, Object>) tempLocationMap.get(inventoryVo.getWarehouse_code());
-					lotNoMap.put("재고량", inventoryVo.getAmount());
-					lotNoMap.put("제품명", inventoryVo.getItem_name());
 					tempWareMap.put(inventoryVo.getLot_no(), lotNoMap);
-					cnt++;
 				} else {
-					lotNoMap.put("재고량", inventoryVo.getAmount());
-					lotNoMap.put("제품명", inventoryVo.getItem_name());
 					wareMap.put(inventoryVo.getLot_no(), lotNoMap);
 					tempLocationMap.put(inventoryVo.getWarehouse_code() ,wareMap);
-					cnt++;
 				}
 			} else {
-				lotNoMap.put("재고량", inventoryVo.getAmount());
-				lotNoMap.put("제품명", inventoryVo.getItem_name());
 				wareMap.put(inventoryVo.getLot_no(), lotNoMap);
 				locationMap.put(inventoryVo.getWarehouse_code() ,wareMap);
 				result.put(inventoryVo.getLocation(), locationMap);
-				cnt++;
 			}
+			cnt++;
 		}
 		System.out.println(cnt);
 		return result;
+	}
+
+	public List<InventoryVo> selectByLocAndWare(String location, String warehouseCode) {
+		HashMap locAndWare = new HashMap();
+		locAndWare.put("location", location);
+		locAndWare.put("warehouseCode", warehouseCode);		
+		return mapper.selectByLocAndWare(locAndWare);
 	}
 }
