@@ -39,4 +39,6 @@ public interface InventoryMapper {
 
 	int move(LogiVo logiVo);
 
+	List<InventoryVo> selectToMap();
+
 }
