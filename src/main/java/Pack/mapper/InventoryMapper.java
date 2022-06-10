@@ -1,5 +1,6 @@
 package Pack.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -40,5 +41,7 @@ public interface InventoryMapper {
 	int move(LogiVo logiVo);
 
 	List<InventoryVo> selectToMap();
+
+	List<InventoryVo> selectByLocAndWare(HashMap locAndWare);
 
 }
