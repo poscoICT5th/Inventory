@@ -1,5 +1,7 @@
 package Pack.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +66,41 @@ public class InventoryService {
 
 	public int move(LogiVo logiVo) {
 		return mapper.move(logiVo);
+	}
+
+	public HashMap selectToMap() {
+		HashMap<String, HashMap> result = new HashMap<String, HashMap>();
+		List<InventoryVo> resultToMap = mapper.selectAll();
+		int cnt = 0;
+		for (InventoryVo inventoryVo : resultToMap) {
+			HashMap<String, Object> locationMap = new HashMap<>();
+			HashMap<String, Object> wareMap = new HashMap<>();
+			HashMap<String, Object> lotNoMap = new HashMap<>();
+			if (result.containsKey(inventoryVo.getLocation())) {
+				HashMap<String, Object> tempLocationMap = result.get(inventoryVo.getLocation());
+				if (tempLocationMap.containsKey(inventoryVo.getWarehouse_code())) {
+					HashMap<String, Object> tempWareMap = (HashMap<String, Object>) tempLocationMap.get(inventoryVo.getWarehouse_code());
+					lotNoMap.put("재고량", inventoryVo.getAmount());
+					lotNoMap.put("제품명", inventoryVo.getItem_name());
+					tempWareMap.put(inventoryVo.getLot_no(), lotNoMap);
+					cnt++;
+				} else {
+					lotNoMap.put("재고량", inventoryVo.getAmount());
+					lotNoMap.put("제품명", inventoryVo.getItem_name());
+					wareMap.put(inventoryVo.getLot_no(), lotNoMap);
+					tempLocationMap.put(inventoryVo.getWarehouse_code() ,wareMap);
+					cnt++;
+				}
+			} else {
+				lotNoMap.put("재고량", inventoryVo.getAmount());
+				lotNoMap.put("제품명", inventoryVo.getItem_name());
+				wareMap.put(inventoryVo.getLot_no(), lotNoMap);
+				locationMap.put(inventoryVo.getWarehouse_code() ,wareMap);
+				result.put(inventoryVo.getLocation(), locationMap);
+				cnt++;
+			}
+		}
+		System.out.println(cnt);
+		return result;
 	}
 }

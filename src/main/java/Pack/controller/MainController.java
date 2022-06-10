@@ -1,6 +1,8 @@
 package Pack.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -83,6 +85,13 @@ public class MainController {
 		List<InventoryCustomer> inventoryCustomer = inventoryService.selectCustomer(location);
 		System.out.println(inventoryCustomer.size());
 		return inventoryCustomer;
+	}
+	
+	@GetMapping("/map")	
+	public HashMap<String, Object> selectToMap() {
+		System.out.println("map data 요청");
+		HashMap result = inventoryService.selectToMap();
+		return result;
 	}
 	
 	@DeleteMapping("/{lotNo}")

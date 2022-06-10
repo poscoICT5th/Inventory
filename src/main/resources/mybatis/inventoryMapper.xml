@@ -6,7 +6,7 @@
 		from Inventory;
 	</select>
 	
-	<select id="selectByLotNo" parameterType="String" resultType="InventoryVo">
+	<select id="selectByLotNo" parameterType="String" resultType="Pack.vo.InventoryVo">
 		select *, TIMESTAMPDIFF(MONTH, warehouse_date, now()) as fixed_month, datediff(now(), inventory_date) as warehouse_aging 
 		from Inventory
 		where lot_no=#{lot_no}
@@ -57,8 +57,8 @@
 	</select>
 	
     <delete id="delete" parameterType="String">
-    	DELETE 
-    	FROM Inventory 
+    	DELETE
+    	FROM Inventory
     	WHERE lot_no = #{lot_no}
     </delete>
     
@@ -88,7 +88,7 @@
     		lot_no = #{lot_no}
     </update>
     
-    <insert id="insert" parameterType="InventoryDTO">
+    <insert id="insert" parameterType="Pack.vo.InventoryDTO">
 	    INSERT
         INTO Inventory 
         VALUES (
@@ -115,7 +115,7 @@
         );
     </insert>
     
-    <update id='reduce' parameterType="LogiVo">
+    <update id='reduce' parameterType="Pack.vo.LogiVo">
     	UPDATE Inventory
     	SET
 			amount = (amount-#{ex_amount})
@@ -123,7 +123,7 @@
     		lot_no = #{lot_no}
     </update>
         
-    <update id='move' parameterType="LogiVo">
+    <update id='move' parameterType="Pack.vo.LogiVo">
     	UPDATE Inventory
     	SET
 			warehouse_code = #{to_warehouse},
