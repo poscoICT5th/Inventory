@@ -16,7 +16,7 @@ public class InventoryUpd {
 	String product_family;
 	String warehouse_code;
 	String lot_no;
-	String item_num;
+	String item_no;
 	String item_desc;
 	String item_name;
 	int amount;
@@ -31,7 +31,7 @@ public class InventoryUpd {
 	
 	public InventoryUpd(String industry_family, String stock_type, String stock_quality_status,
 			String status_cause, String location, String product_family, String warehouse_code,
-			String item_num, String item_desc, String item_name, int amount, float weight, String unit, String customer,
+			String item_no, String item_desc, String item_name, int amount, float weight, String unit, String customer,
 			float width, float thickness, float height, String inventory_date, String warehouse_date) {
 		super();
 		this.industry_family = industry_family;
@@ -41,7 +41,7 @@ public class InventoryUpd {
 		this.location = location;
 		this.product_family = product_family;
 		this.warehouse_code = warehouse_code;
-		this.item_num = item_num;
+		this.item_no = item_no;
 		this.item_desc = item_desc;
 		this.item_name = item_name;
 		this.amount = amount;

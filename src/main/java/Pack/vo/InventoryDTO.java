@@ -14,7 +14,7 @@ public class InventoryDTO {
 	String product_family;
 	String warehouse_code;
 	String lot_no;
-	String item_num;
+	String item_no;
 	String item_desc;
 	String item_name;
 	int amount;
@@ -34,7 +34,7 @@ public class InventoryDTO {
 		this.product_family = logiVo.getProduct_family();
 		this.warehouse_code = logiVo.getTo_warehouse();
 		this.lot_no = logiVo.getLot_no();
-		this.item_num = logiVo.getItem_no();
+		this.item_no = logiVo.getItem_no();
 		this.item_desc = "";
 		this.item_name = logiVo.getItem_name();
 		this.amount = logiVo.getAmount();
