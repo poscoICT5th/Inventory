@@ -24,7 +24,7 @@
     		<if test='product_family != null and product_family neq "전체보기"'>product_family=#{product_family} and</if>
     		<if test='warehouse_code != null and warehouse_code neq "전체보기"'>warehouse_code=#{warehouse_code} and</if>
     		<if test='lot_no != null and lot_no neq "전체보기"'>lot_no=#{lot_no} and</if>
-    		<if test='item_num != null and item_num neq "전체보기"'>item_num=#{item_num} and</if>
+    		<if test='item_no != null and item_no neq "전체보기"'>item_no=#{item_no} and</if>
     		<if test='item_desc != null and item_desc neq "전체보기"'>item_desc=#{item_desc} and</if>
     		<if test='item_name != null and item_name neq "전체보기"'>item_name=#{item_name} and</if>
     		<if test='unit != null and unit neq "전체보기"'>unit=#{unit} and</if>
@@ -79,7 +79,7 @@
 			location = #{location},
 			product_family = #{product_family},
 			warehouse_code = #{warehouse_code},
-			item_num = #{item_num},
+			item_no = #{item_no},
 			item_desc = #{item_desc},
 			item_name = #{item_name},
 			amount = #{amount},
@@ -107,7 +107,7 @@
         	#{product_family},
         	#{warehouse_code},
         	#{lot_no},
-        	#{item_num},
+        	#{item_no},
         	#{item_desc},
         	#{item_name},
         	#{amount},

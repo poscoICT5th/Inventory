@@ -16,7 +16,7 @@ public class InventoryWarehouse {
 	String product_family;
 	String warehouse_code;
 	String lot_no;
-	String item_num;
+	String item_no;
 	String item_desc;
 	String item_name;
 	int amount;
