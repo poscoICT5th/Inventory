@@ -24,8 +24,8 @@
     		<if test='product_family != null and product_family neq "전체보기"'>product_family=#{product_family} and</if>
     		<if test='warehouse_code != null and warehouse_code neq "전체보기"'>warehouse_code=#{warehouse_code} and</if>
     		<if test='lot_no != null and lot_no neq "전체보기"'>lot_no=#{lot_no} and</if>
-    		<if test='item_no != null and item_no neq "전체보기"'>item_no=#{item_no} and</if>
-    		<if test='item_desc != null and item_desc neq "전체보기"'>item_desc=#{item_desc} and</if>
+    		<if test='item_code != null and item_code neq "전체보기"'>item_code=#{item_code} and</if>
+    		<if test='state != null and state neq "전체보기"'>state=#{state} and</if>
     		<if test='item_name != null and item_name neq "전체보기"'>item_name=#{item_name} and</if>
     		<if test='unit != null and unit neq "전체보기"'>unit=#{unit} and</if>
     		<if test='customer != null and customer neq "전체보기"'>customer=#{customer} and</if>
@@ -35,10 +35,10 @@
 	    	(weight between #{min_weight} and #{max_weight}) and
 	    	(width between #{min_width} and #{max_width}) and
 	    	(thickness between #{min_thickness} and #{max_thickness}) and
-	    	(height between #{min_height} and #{max_height});
+	    	(height between #{min_height} and #{max_height})
     </select>
     
-    <select id="selectWarehouse"  resultType="Pack.vo.InventoryWarehouse">
+    <select id="selectWarehouse"  resultType="Pack.vo.InventoryVo">
 		select *, TIMESTAMPDIFF(MONTH, warehouse_date, now()) as fixed_month, datediff(now(), inventory_date) as warehouse_aging 
 		from Inventory
 		WHERE warehouse_code = #{warehouse_code}
@@ -62,11 +62,32 @@
 		WHERE location = #{location} and
 		warehouse_code = #{warehouseCode}
 	</select>
+	
+	<select id="selectAging" resultType="Pack.vo.InventoryVo">
+		SELECT * , TIMESTAMPDIFF(MONTH, warehouse_date, now()) as fixed_month, datediff(now(), inventory_date) as warehouse_aging 
+		FROM Inventory 
+		ORDER BY warehouse_aging DESC LIMIT 10;
+	</select>
 		
+	<select id="selectAmount" resultType="Pack.vo.InventoryVo">
+		SELECT * , sum(amount) as sum, TIMESTAMPDIFF(MONTH, warehouse_date, now()) as fixed_month, datediff(now(), inventory_date) as warehouse_aging 
+		FROM Inventory 
+		GROUP BY item_name 
+		ORDER BY sum(amount) DESC LIMIT 10;
+	</select>
+	
     <delete id="delete" parameterType="String">
     	DELETE
     	FROM Inventory
     	WHERE lot_no = #{lot_no}
+    </delete>
+    
+    <delete id="deletes" parameterType="List">
+    	<foreach collection="inventoryDeleteList" item="lot_no" index="index">
+		    DELETE
+			FROM Inventory
+			where lot_no=#{lot_no};
+		</foreach>
     </delete>
     
     <update id='update' parameterType="Pack.vo.InventoryUpd">
@@ -79,8 +100,8 @@
 			location = #{location},
 			product_family = #{product_family},
 			warehouse_code = #{warehouse_code},
-			item_no = #{item_no},
-			item_desc = #{item_desc},
+			item_code = #{item_code},
+			state = #{state},
 			item_name = #{item_name},
 			amount = #{amount},
 			weight = #{weight},
@@ -99,24 +120,24 @@
 	    INSERT
         INTO Inventory 
         VALUES (
+        	#{lot_no},
         	#{industry_family},
         	NULL,
-        	NULL,
-        	NULL,
-        	#{location},
         	#{product_family},
+        	#{state},
+        	#{location},
         	#{warehouse_code},
-        	#{lot_no},
-        	#{item_no},
-        	#{item_desc},
+        	#{item_code},
         	#{item_name},
         	#{amount},
-        	#{weight},
         	#{unit},
-        	#{customer},
+        	#{weight},
         	#{width},
         	#{thickness},
         	#{height},
+        	#{customer},
+        	NULL,
+        	NULL,
         	date_format(now(), "%Y-%m-%d"),
         	date_format(now(), "%Y-%m-%d")
         );

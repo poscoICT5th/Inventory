@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString 
 @Getter
 @Setter
-public class InventorySch {
+public class InventoryAmount {
 	String lot_no;
 	String industry_family;
 	String stock_type;
@@ -17,20 +17,18 @@ public class InventorySch {
 	String warehouse_code;
 	String item_code;
 	String item_name;
-	int min_amount;
-	int max_amount;
+	int amount;
 	String unit;
-	float min_weight;
-	float max_weight;
-	float min_width;
-	float max_width;
-	float min_thickness;
-	float max_thickness;
-	float min_height;
-	float max_height;
+	float weight;
+	float width;
+	float thickness;
+	float height;
 	String customer;
 	String stock_quality_status;
 	String status_cause;
+	int sum;
 	String inventory_date;
 	String warehouse_date;
+	int fixed_month;
+	int warehouse_aging;
 }

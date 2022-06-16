@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import Pack.vo.InventoryAmount;
 import Pack.vo.InventoryCustomer;
 import Pack.vo.InventoryItemname;
 import Pack.vo.InventoryDTO;
@@ -22,13 +23,19 @@ public interface InventoryMapper {
     
     List<InventoryVo> selectSome(InventorySch inventorySch);
     
-    List<InventoryWarehouse> selectWarehouse(String warehouseCode);
+    List<InventoryVo> selectWarehouse(String warehouseCode);
     
     List<InventoryItemname> selectItemname(String location);
     
     List<InventoryCustomer> selectCustomer(String location);
     
+    List<InventoryVo> selectAging();
+    
+    List<InventoryVo> selectAmount();
+    
     int delete(String lotNo);
+    
+    int deletes(List inventoryDeleteList);
     
     int update(InventoryUpd inventoryUpd);
 

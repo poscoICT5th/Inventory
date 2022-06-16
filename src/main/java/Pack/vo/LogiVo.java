@@ -14,28 +14,29 @@ import lombok.ToString;
 @Getter
 @Setter
 public class LogiVo {
-	String status;
-	String industry_family;
-	String location;
-	String instruction_no;
-	String product_family;
 	String lot_no;
-	String item_no;
+	String industry_family;
+	String stock_type;
+	String product_family;
+	String state;
+	String location;
+	String warehouse_code;
+	String item_code;
 	String item_name;
 	int amount;
-	float weight;
 	String unit;
-	String customer;
+	float weight;
 	float width;
 	float thickness;
 	float height;
-	int order_amount;
-	int im_amount;
-	String to_warehouse;
-	String order_date;
-	String inst_reg_date;
-	String inst_deadline;
-	String done_date;
+	String customer;
+	String stock_quality_status;
+	String status_cause;
+	int sum;
+	String inventory_date;
+	String warehouse_date;
+	int fixed_month;
+	int warehouse_aging;
 	// 출고 컬럼
 	int ex_amount;
 	int ex_remain;

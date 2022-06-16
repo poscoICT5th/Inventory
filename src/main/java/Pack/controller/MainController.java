@@ -17,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import Pack.service.InventoryService;
 import Pack.service.TestService;
+import Pack.vo.InventoryAmount;
 import Pack.vo.InventoryCustomer;
+import Pack.vo.InventoryDeleteList;
 import Pack.vo.InventoryItemname;
 import Pack.vo.InventorySch;
 import Pack.vo.InventoryUpd;
@@ -66,7 +68,7 @@ public class MainController {
 	@GetMapping("/{warehouseCode}")
 	public List inventoryWarehouse(@PathVariable("warehouseCode") String warehouseCode) {
 		System.out.println("inventoryWarehouse");
-		List<InventoryWarehouse> inventoryWarehouse = inventoryService.selectWarehouse(warehouseCode);
+		List<InventoryVo> inventoryWarehouse = inventoryService.selectWarehouse(warehouseCode);
 		System.out.println(inventoryWarehouse.size());
 		return inventoryWarehouse;
 	}
@@ -93,6 +95,22 @@ public class MainController {
 		HashMap result = inventoryService.selectToMap();
 		return result;
 	}
+	
+	@GetMapping("/aging")
+	public List inventoryAging() {
+		System.out.println("inventoryAging");
+	    List<InventoryVo> inventoryList = inventoryService.selectAging();
+	    System.out.println(inventoryList.size());
+	    return inventoryList;
+	}
+	
+	@GetMapping("/amount")
+	public List inventoryAmount() {
+		System.out.println("inventoryAmount");
+		List<InventoryVo> inventoryList = inventoryService.selectAmount();
+		System.out.println(inventoryList.size());
+		return inventoryList;
+	}
 
 	@GetMapping("/location/{location}/warehouse/{warehouseCode}")	
 	public List<InventoryVo> selectByLocAndWare(@PathVariable String location, @PathVariable String warehouseCode) {
@@ -102,14 +120,23 @@ public class MainController {
 	}
 
 	@DeleteMapping("/{lotNo}")
-	public boolean warehouseDel(@PathVariable("lotNo") String lotNo) {
+	public boolean inventoryDel(@PathVariable("lotNo") String lotNo) {
+		System.out.println("delete");
 		System.out.println(lotNo);
 		int result = inventoryService.inventoryDel(lotNo);
 		return result == 1 ? true : false;
 	}
 	
+	@DeleteMapping("/")
+	public boolean inventoryDels(@RequestBody InventoryDeleteList inventoryDeleteList) {
+		System.out.println("delete List");
+		System.out.println(inventoryDeleteList);
+		int result = inventoryService.inventoryDels(inventoryDeleteList);
+		return result == 1 ? true : false;
+	}
+	
 	@PutMapping("/{lotNo}")
-	public boolean warehouseUpd(@PathVariable("lotNo") String lotNo, @RequestBody InventoryUpd inventoryUpd) {
+	public boolean inventoryUpd(@PathVariable("lotNo") String lotNo, @RequestBody InventoryUpd inventoryUpd) {
 		System.out.println(lotNo);
 		System.out.println(inventoryUpd);
 		int result = inventoryService.inventoryUpd(lotNo, inventoryUpd);
