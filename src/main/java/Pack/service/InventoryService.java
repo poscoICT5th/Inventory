@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Pack.mapper.InventoryMapper;
+import Pack.vo.InventoryAmount;
 import Pack.vo.InventoryCustomer;
 import Pack.vo.InventoryItemname;
 import Pack.vo.InventoryDTO;
+import Pack.vo.InventoryDeleteList;
 import Pack.vo.InventorySch;
 import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
@@ -29,7 +31,7 @@ public class InventoryService {
     	return mapper.selectSome(inventorySch);
     }
     
-    public List<InventoryWarehouse> selectWarehouse(String warehouseCode){
+    public List<InventoryVo> selectWarehouse(String warehouseCode){
     	return mapper.selectWarehouse(warehouseCode);
     }
     
@@ -41,8 +43,20 @@ public class InventoryService {
     	return mapper.selectCustomer(location);
     }
     
+    public List<InventoryVo> selectAging() {
+    	return mapper.selectAging();
+    }
+    
+    public List<InventoryVo> selectAmount(){
+    	return mapper.selectAmount();
+    }
+    
     public int inventoryDel(String lotNo) {
     	return mapper.delete(lotNo);
+    }
+    
+    public int inventoryDels(InventoryDeleteList inventoryDeleteList) {
+    	return mapper.deletes(inventoryDeleteList.getInventoryDeleteList());
     }
     
     public int inventoryUpd(String lotNo, InventoryUpd inventoryUpd) {

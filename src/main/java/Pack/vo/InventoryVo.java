@@ -8,26 +8,24 @@ import lombok.ToString;
 @Getter
 @Setter
 public class InventoryVo {
+	String lot_no;
 	String industry_family;
 	String stock_type;
-	String stock_quality_status;
-	String status_cause;
-	String location;
 	String product_family;
+	String state;
+	String location;
 	String warehouse_code;
-	String lot_no;
-	String item_no;
-	String item_desc;
+	String item_code;
 	String item_name;
 	int amount;
-	float weight;
 	String unit;
-	String customer;
-	int fixed_month;
+	float weight;
 	float width;
 	float thickness;
 	float height;
+	String customer;
+	String stock_quality_status;
+	String status_cause;
 	String inventory_date;
 	String warehouse_date;
-	int warehouse_aging;
 }
