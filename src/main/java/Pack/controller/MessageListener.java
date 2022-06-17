@@ -20,7 +20,7 @@ import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.core.Message;
 
 @Component
-public class messageListener {
+public class MessageListener {
 	@Autowired
 	InventoryService inventoryService;
 	@RabbitListener(
