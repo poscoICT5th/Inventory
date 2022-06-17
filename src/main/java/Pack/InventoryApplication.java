@@ -15,7 +15,7 @@ public class InventoryApplication extends SpringBootServletInitializer{
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(InventoryApplication.class);
-	}
+	}  
 	// rabbitmq
 	@Bean
 	Jackson2JsonMessageConverter jackson2JsonMessageConverter (){
