@@ -20,7 +20,7 @@ public class LogiVo {
 	String product_family;
 	String state;
 	String location;
-	String warehouse_code;
+	String to_warehouse;
 	String item_code;
 	String item_name;
 	int amount;

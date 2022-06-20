@@ -37,7 +37,7 @@ public class InventoryDTO {
 		this.product_family = logiVo.getProduct_family();
 		this.state = logiVo.getState();
 		this.location = logiVo.getLocation();
-		this.warehouse_code = logiVo.getWarehouse_code();
+		this.warehouse_code = logiVo.getTo_warehouse();
 		this.item_code = logiVo.getItem_code();
 		this.item_name = logiVo.getItem_name();
 		this.amount = logiVo.getAmount();

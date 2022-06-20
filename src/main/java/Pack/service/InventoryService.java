@@ -84,6 +84,7 @@ public class InventoryService {
 	public HashMap selectToMap() {
 		HashMap<String, HashMap> result = new HashMap<String, HashMap>();
 		List<InventoryVo> resultToMap = mapper.selectAll();
+		System.out.println("들어옴?");
 		int cnt = 0;
 		for (InventoryVo inventoryVo : resultToMap) {
 			HashMap<String, Object> locationMap = new HashMap<>();
