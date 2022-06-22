@@ -10,6 +10,7 @@ import Pack.mapper.InventoryMapper;
 import Pack.vo.InventoryAmount;
 import Pack.vo.InventoryCustomer;
 import Pack.vo.InventoryItemname;
+import Pack.vo.InventoryProduceDTO;
 import Pack.vo.InventoryDTO;
 import Pack.vo.InventoryDeleteList;
 import Pack.vo.InventorySch;
@@ -67,6 +68,10 @@ public class InventoryService {
 
 	public int insert(InventoryDTO inventoryDTO) {
 		return mapper.insert(inventoryDTO);
+	}
+	
+	public int produce(InventoryProduceDTO inventoryProduceDTO) {
+		return mapper.produce(inventoryProduceDTO);
 	}
 
 	public InventoryVo selectByLotNo(String lot_no) {

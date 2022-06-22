@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import Pack.vo.InventoryAmount;
 import Pack.vo.InventoryCustomer;
 import Pack.vo.InventoryDeleteList;
 import Pack.vo.InventoryItemname;
+import Pack.vo.InventoryProduceDTO;
 import Pack.vo.InventorySch;
 import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
@@ -65,7 +67,7 @@ public class MainController {
 		return inventorySearch;
 	}
 	
-	@GetMapping("/{warehouseCode}")
+	@GetMapping("/warehouse/{warehouseCode}")
 	public List inventoryWarehouse(@PathVariable("warehouseCode") String warehouseCode) {
 		System.out.println("inventoryWarehouse");
 		List<InventoryVo> inventoryWarehouse = inventoryService.selectWarehouse(warehouseCode);
@@ -141,5 +143,15 @@ public class MainController {
 		System.out.println(inventoryUpd);
 		int result = inventoryService.inventoryUpd(lotNo, inventoryUpd);
 		return result == 1 ? true : false;
+	}
+	
+	@PostMapping("/produce")
+	public boolean inventoryProduce(@RequestBody InventoryProduceDTO data) {
+//	public boolean inventoryMix(@RequestBody HashMap<String, Object> data) {
+		System.out.println("post 들어감");
+		System.out.println(data); 
+		int result = inventoryService.produce(data);
+//		return true;
+		return result==1?true:false;
 	}
 }

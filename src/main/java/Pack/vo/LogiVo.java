@@ -44,4 +44,5 @@ public class LogiVo {
 	int move_amount;
 	String from_warehouse;
 	
+	
 }
