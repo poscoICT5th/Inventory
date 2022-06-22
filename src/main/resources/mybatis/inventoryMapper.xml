@@ -160,7 +160,43 @@
     		lot_no = #{lot_no}
     </update>
     
+    <update id='produce' parameterType="Pack.vo.InventoryProduceDTO">
+    		<foreach collection="consumedProducts" item="produce" index="index">
+    		UPDATE Inventory
+    		SET
+    			amount = (amount-#{produce.amount})
+    		WHERE
+    			lot_no = #{produce.lot_no};
+    		</foreach>
+    		
+    		INSERT
+        	INTO Inventory 
+        	VALUES (
+	        	#{newProduct.lot_no},
+	        	#{newProduct.industry_family},
+	        	NULL,
+	        	#{newProduct.product_family},
+	        	#{newProduct.state},
+	        	#{newProduct.location},
+	        	#{newProduct.warehouse_code},
+	        	#{newProduct.item_code},
+	        	#{newProduct.item_name},
+	        	#{newProduct.amount},
+	        	#{newProduct.unit},
+	        	#{newProduct.weight},
+	        	#{newProduct.width},
+	        	#{newProduct.thickness},
+	        	#{newProduct.height},
+	        	#{newProduct.customer},
+	        	NULL,
+	        	NULL,
+	        	date_format(now(), "%Y-%m-%d"),
+	        	date_format(now(), "%Y-%m-%d")
+        	);
+    </update>
+
     <select id='getTrendInfo' resultType="TrendInfo">
     	SELECT * from Trend;
     </select>
+
 </mapper>
