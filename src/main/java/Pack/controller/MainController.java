@@ -28,6 +28,7 @@ import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
 import Pack.vo.InventoryWarehouse;
 import Pack.vo.TestVo;
+import Pack.vo.TrendInfo;
 
 @CrossOrigin("*")
 @RestController
@@ -67,8 +68,14 @@ public class MainController {
 		return inventorySearch;
 	}
 	
+	@GetMapping("/trend")
+	public List<TrendInfo> getTrendInfo() {
+		return inventoryService.getTrendInfo();
+	}
+	
 	@GetMapping("/warehouse/{warehouseCode}")
-	public List inventoryWarehouse(@PathVariable("warehouseCode") String warehouseCode) {
+	public List inventoryByWarehouse(@PathVariable("warehouseCode") String warehouseCode) {
+
 		System.out.println("inventoryWarehouse");
 		List<InventoryVo> inventoryWarehouse = inventoryService.selectWarehouse(warehouseCode);
 		System.out.println(inventoryWarehouse.size());
@@ -145,6 +152,7 @@ public class MainController {
 		return result == 1 ? true : false;
 	}
 	
+
 	@PostMapping("/produce")
 	public boolean inventoryProduce(@RequestBody InventoryProduceDTO data) {
 //	public boolean inventoryMix(@RequestBody HashMap<String, Object> data) {
@@ -154,4 +162,5 @@ public class MainController {
 //		return true;
 		return result==1?true:false;
 	}
+
 }
