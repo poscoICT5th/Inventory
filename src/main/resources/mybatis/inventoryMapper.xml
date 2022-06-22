@@ -139,5 +139,7 @@
     		lot_no = #{lot_no}
     </update>
     
-    
+    <select id='getTrendInfo' resultType="TrendInfo">
+    	SELECT * from Trend;
+    </select>
 </mapper>
