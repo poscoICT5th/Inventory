@@ -26,6 +26,7 @@ import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
 import Pack.vo.InventoryWarehouse;
 import Pack.vo.TestVo;
+import Pack.vo.TrendInfo;
 
 @CrossOrigin("*")
 @RestController
@@ -65,8 +66,13 @@ public class MainController {
 		return inventorySearch;
 	}
 	
-	@GetMapping("/{warehouseCode}")
-	public List inventoryWarehouse(@PathVariable("warehouseCode") String warehouseCode) {
+	@GetMapping("/trend")
+	public List<TrendInfo> getTrendInfo() {
+		return inventoryService.getTrendInfo();
+	}
+	
+	@GetMapping("/warehouse/{warehouseCode}")
+	public List inventoryByWarehouse(@PathVariable("warehouseCode") String warehouseCode) {
 		System.out.println("inventoryWarehouse");
 		List<InventoryVo> inventoryWarehouse = inventoryService.selectWarehouse(warehouseCode);
 		System.out.println(inventoryWarehouse.size());
@@ -142,4 +148,5 @@ public class MainController {
 		int result = inventoryService.inventoryUpd(lotNo, inventoryUpd);
 		return result == 1 ? true : false;
 	}
+	
 }
