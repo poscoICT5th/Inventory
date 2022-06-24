@@ -196,7 +196,7 @@
     </update>
 
     <select id='getTrendInfo' resultType="TrendInfo">
-    	SELECT * from Trend;
+    	SELECT trend_idx, (UNIX_TIMESTAMP(date)* 1000) as date, inven_motor, inven_rotor, inven_strip, export_motor, export_rotor, export_strip FROM pscict_final.Trend;
     </select>
 
 </mapper>
