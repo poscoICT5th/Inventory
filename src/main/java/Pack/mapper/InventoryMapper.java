@@ -16,6 +16,7 @@ import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
 import Pack.vo.InventoryWarehouse;
 import Pack.vo.LogiVo;
+import Pack.vo.StatusChangeInfo;
 import Pack.vo.TrendInfo;
 
 @Repository
@@ -56,5 +57,7 @@ public interface InventoryMapper {
 	List<InventoryVo> selectByLocAndWare(HashMap locAndWare);
 
 	List<TrendInfo> getTrendInfo();
+
+	int statusChange(StatusChangeInfo statusChangeInfo);
 
 }
