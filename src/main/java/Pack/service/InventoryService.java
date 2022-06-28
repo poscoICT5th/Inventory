@@ -20,6 +20,7 @@ import Pack.vo.InventoryVo;
 import Pack.vo.InventoryWarehouse;
 import Pack.vo.LogiVo;
 import Pack.vo.SendTraceDTO;
+import Pack.vo.StatusChangeInfo;
 import Pack.vo.TrendInfo;
 
 @Service
@@ -136,5 +137,9 @@ public class InventoryService {
 
 	public List<TrendInfo> getTrendInfo() {
 		return mapper.getTrendInfo();
+	}
+
+	public int statusChange(StatusChangeInfo statusChangeInfo) {
+		return mapper.statusChange(statusChangeInfo);
 	}
 }

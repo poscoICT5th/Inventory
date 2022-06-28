@@ -199,4 +199,14 @@
     	SELECT * from Trend;
     </select>
 
+    <update id='statusChange' parameterType="StatusChangeInfo">
+   		<foreach collection="statusChangeList" item="statusChangeLotno" index="index">
+    		UPDATE Inventory
+    		SET
+    			stock_quality_status = #{stock_quality_status},
+    			status_cause = #{status_cause}    			
+    		WHERE
+    			lot_no = #{statusChangeLotno};
+   		</foreach>
+    </update>
 </mapper>

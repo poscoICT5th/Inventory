@@ -27,6 +27,7 @@ import Pack.vo.InventorySch;
 import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
 import Pack.vo.InventoryWarehouse;
+import Pack.vo.StatusChangeInfo;
 import Pack.vo.TestVo;
 import Pack.vo.TrendInfo;
 
@@ -163,4 +164,11 @@ public class MainController {
 		return result==1?true:false;
 	}
 
+	@PutMapping("/statuschange")
+	public boolean statusChange(@RequestBody StatusChangeInfo statusChangeInfo) {
+		System.out.println("post 들어감");
+		System.out.println(statusChangeInfo); 
+		int result = inventoryService.statusChange(statusChangeInfo);
+		return result>0?true:false;
+	}
 }
