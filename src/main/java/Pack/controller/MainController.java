@@ -22,6 +22,7 @@ import Pack.vo.InventoryAmount;
 import Pack.vo.InventoryCustomer;
 import Pack.vo.InventoryDeleteList;
 import Pack.vo.InventoryItemname;
+import Pack.vo.InventoryMap;
 import Pack.vo.InventoryProduceDTO;
 import Pack.vo.InventorySch;
 import Pack.vo.InventoryUpd;
@@ -99,11 +100,19 @@ public class MainController {
 		return inventoryCustomer;
 	}
 	
-	@GetMapping("/map")	
-	public HashMap<String, Object> selectToMap() {
-		System.out.println("map data 요청");
-		HashMap result = inventoryService.selectToMap();
-		return result;
+//	@GetMapping("/map")	
+//	public HashMap<String, Object> selectToMap() {
+//		System.out.println("map data 요청");
+//		HashMap result = inventoryService.selectToMap();
+//		return result;
+//	}
+	
+	@GetMapping("/map")
+	public List inventoryMap() {
+		System.out.println("inventoryMap");
+		List<InventoryMap> inventoryMap = inventoryService.selectMap();
+		System.out.println(inventoryMap.size());
+		return inventoryMap;
 	}
 	
 	@GetMapping("/aging")

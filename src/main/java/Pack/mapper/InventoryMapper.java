@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import Pack.vo.InventoryAmount;
 import Pack.vo.InventoryCustomer;
 import Pack.vo.InventoryItemname;
+import Pack.vo.InventoryMap;
 import Pack.vo.InventoryProduceDTO;
 import Pack.vo.InventoryDTO;
 import Pack.vo.InventorySch;
@@ -35,6 +36,8 @@ public interface InventoryMapper {
     List<InventoryVo> selectAging();
     
     List<InventoryVo> selectAmount();
+    
+    List<InventoryMap> selectMap();
     
     int delete(String lotNo);
     
