@@ -3,6 +3,7 @@ package Pack.service;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +20,18 @@ import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
 import Pack.vo.InventoryWarehouse;
 import Pack.vo.LogiVo;
+import Pack.vo.ProcessingVo;
+import Pack.vo.SendTraceDTO;
+import Pack.vo.StatusChangeInfo;
 import Pack.vo.TrendInfo;
 
 @Service
 public class InventoryService {
 	@Autowired
     public InventoryMapper mapper;
+	
+	@Autowired
+	RabbitTemplate rabbitTemplate;
     
     public List<InventoryVo> selectAll() {
         return mapper.selectAll();
@@ -77,7 +84,11 @@ public class InventoryService {
 	}
 	
 	public int produce(InventoryProduceDTO inventoryProduceDTO) {
-		return mapper.produce(inventoryProduceDTO);
+		int result = mapper.produce(inventoryProduceDTO);
+		if (result > 1) {
+			rabbitTemplate.convertAndSend("posco", "import.Traceback.manufacture", new SendTraceDTO(inventoryProduceDTO));
+		}
+		return result;
 	}
 
 	public InventoryVo selectByLotNo(String lot_no) {
@@ -132,5 +143,17 @@ public class InventoryService {
 
 	public List<TrendInfo> getTrendInfo() {
 		return mapper.getTrendInfo();
+	}
+
+	public int statusChange(StatusChangeInfo statusChangeInfo) {
+		return mapper.statusChange(statusChangeInfo);
+	}
+
+	public int processing(ProcessingVo processingVo) {
+		return mapper.processing(processingVo);
+	}
+
+	public int processDone(LogiVo logiVo) {
+		return mapper.processDone(logiVo);
 	}
 }

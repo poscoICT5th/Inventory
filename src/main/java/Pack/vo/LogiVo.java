@@ -24,6 +24,8 @@ public class LogiVo {
 	String item_code;
 	String item_name;
 	int amount;
+	int order_amount;
+	int im_amount;
 	String unit;
 	float weight;
 	float width;

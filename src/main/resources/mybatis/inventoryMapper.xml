@@ -203,7 +203,33 @@
     </update>
 
     <select id='getTrendInfo' resultType="TrendInfo">
-    	SELECT * from Trend;
+    	SELECT trend_idx, (UNIX_TIMESTAMP(date)* 1000) as date, inven_motor, inven_rotor, inven_strip, export_motor, export_rotor, export_strip FROM pscict_final.Trend;
     </select>
 
+    <update id='statusChange' parameterType="StatusChangeInfo">
+   		<foreach collection="statusChangeList" item="statusChangeLotno" index="index">
+    		UPDATE Inventory
+    		SET
+    			stock_quality_status = #{stock_quality_status},
+    			status_cause = #{status_cause}    			
+    		WHERE
+    			lot_no = #{statusChangeLotno};
+   		</foreach>
+    </update>
+    
+    <update id='processing' parameterType="ProcessingVo">
+    		UPDATE Inventory
+    		SET
+    			state = #{state}    			
+    		WHERE
+    			lot_no = #{lot_no};
+    </update>
+    <update id='proccessDone' parameterType="LogiVo">
+    		UPDATE Inventory
+    		SET
+    			state = ""    			
+    		WHERE
+    			lot_no = #{lot_no};
+    </update>
+    
 </mapper>
