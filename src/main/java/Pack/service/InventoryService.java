@@ -10,6 +10,7 @@ import Pack.mapper.InventoryMapper;
 import Pack.vo.InventoryAmount;
 import Pack.vo.InventoryCustomer;
 import Pack.vo.InventoryItemname;
+import Pack.vo.InventoryMap;
 import Pack.vo.InventoryProduceDTO;
 import Pack.vo.InventoryDTO;
 import Pack.vo.InventoryDeleteList;
@@ -50,6 +51,10 @@ public class InventoryService {
     
     public List<InventoryVo> selectAmount(){
     	return mapper.selectAmount();
+    }
+    
+    public List<InventoryMap> selectMap(){
+    	return mapper.selectMap();
     }
     
     public int inventoryDel(String lotNo) {
