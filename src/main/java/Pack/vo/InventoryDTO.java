@@ -44,7 +44,7 @@ public class InventoryDTO {
 		this.warehouse_code = logiVo.getTo_warehouse();
 		this.item_code = logiVo.getItem_code();
 		this.item_name = logiVo.getItem_name();
-		this.amount = logiVo.getAmount();
+		this.amount = logiVo.getIm_amount();
 		this.unit = logiVo.getUnit();
 		this.weight = logiVo.getWeight();
 		this.width = logiVo.getWidth();
