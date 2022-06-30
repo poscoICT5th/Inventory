@@ -199,5 +199,9 @@
 	        	date_format(now(), "%Y-%m-%d")
         	);
     </update>
-    
+
+    <select id='getTrendInfo' resultType="TrendInfo">
+    	SELECT * from Trend;
+    </select>
+
 </mapper>

@@ -19,6 +19,7 @@ import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
 import Pack.vo.InventoryWarehouse;
 import Pack.vo.LogiVo;
+import Pack.vo.TrendInfo;
 
 @Service
 public class InventoryService {
@@ -127,5 +128,9 @@ public class InventoryService {
 		locAndWare.put("location", location);
 		locAndWare.put("warehouseCode", warehouseCode);		
 		return mapper.selectByLocAndWare(locAndWare);
+	}
+
+	public List<TrendInfo> getTrendInfo() {
+		return mapper.getTrendInfo();
 	}
 }
