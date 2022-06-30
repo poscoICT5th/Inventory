@@ -54,8 +54,8 @@ public class InventoryService {
     	return mapper.selectAmount();
     }
     
-    public List<InventoryMap> selectMap(){
-    	return mapper.selectMap();
+    public List<InventoryMap> selectMap(String location){
+    	return mapper.selectMap(location);
     }
     
     public int inventoryDel(String lotNo) {

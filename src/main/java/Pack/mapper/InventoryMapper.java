@@ -36,7 +36,7 @@ public interface InventoryMapper {
     
     List<InventoryVo> selectAmount();
     
-    List<InventoryMap> selectMap();
+    List<InventoryMap> selectMap(String location);
     
     int delete(String lotNo);
     
@@ -59,5 +59,4 @@ public interface InventoryMapper {
 	List<InventoryVo> selectByLocAndWare(HashMap locAndWare);
 
 	List<TrendInfo> getTrendInfo();
-
 }

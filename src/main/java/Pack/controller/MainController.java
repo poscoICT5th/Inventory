@@ -76,7 +76,6 @@ public class MainController {
 	
 	@GetMapping("/warehouse/{warehouseCode}")
 	public List inventoryByWarehouse(@PathVariable("warehouseCode") String warehouseCode) {
-
 		System.out.println("inventoryWarehouse");
 		List<InventoryVo> inventoryWarehouse = inventoryService.selectWarehouse(warehouseCode);
 		System.out.println(inventoryWarehouse.size());
@@ -106,10 +105,10 @@ public class MainController {
 //		return result;
 //	}
 	
-	@GetMapping("/map")
-	public List inventoryMap() {
+	@GetMapping("/map/{location}")
+	public List inventoryMap(@PathVariable("location") String location) {
 		System.out.println("inventoryMap");
-		List<InventoryMap> inventoryMap = inventoryService.selectMap();
+		List<InventoryMap> inventoryMap = inventoryService.selectMap(location);
 		System.out.println(inventoryMap.size());
 		return inventoryMap;
 	}
