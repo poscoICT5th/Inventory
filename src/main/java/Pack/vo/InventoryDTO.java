@@ -67,7 +67,7 @@ public class InventoryDTO {
 			int fixed_month, int warehouse_aging) {
 		System.out.println("mixData");
 		long curTime = System.currentTimeMillis();
-		String makeDate = new SimpleDateFormat("YYMMddHHmmssms").format(curTime);
+		String makeDate = new SimpleDateFormat("YYMMddHHmmssSSS").format(curTime);
 		this.lot_no = product_family + makeDate;
 		this.industry_family = industry_family;
 		this.stock_type = stock_type;
