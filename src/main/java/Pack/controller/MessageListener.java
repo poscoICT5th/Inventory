@@ -11,6 +11,7 @@ import Pack.service.InventoryService;
 import Pack.vo.InventoryDTO;
 import Pack.vo.InventoryVo;
 import Pack.vo.LogiVo;
+import Pack.vo.ProcessingVo;
 
 import org.springframework.amqp.rabbit.annotation.*;
 
@@ -33,7 +34,9 @@ public class MessageListener {
 		System.out.println(logiVo);
 		String receivedRoutingKey = message.getMessageProperties().getReceivedRoutingKey();
 		System.out.println(receivedRoutingKey);
-		String receiveCMD = receivedRoutingKey.split("\\.")[2];
+		String[] routingKeySplit = receivedRoutingKey.split("\\.");
+		String receiveFrom = routingKeySplit[0];
+		String receiveCMD = routingKeySplit[2];
 		try {
 			if (receiveCMD.equals("add")) {
 				InventoryDTO inventoryDTO = new InventoryDTO(logiVo);
@@ -42,13 +45,19 @@ public class MessageListener {
 			} else if (receiveCMD.equals("update")) {
 				System.out.println("update들어옴");
 			int result = inventoryService.move(logiVo);
-			} else {
+			} else if (receiveCMD.equals("reduce")) {
 				System.out.println("reduce들어옴");
 				InventoryVo inventoryVo = inventoryService.selectByLotNo(logiVo.getLot_no());
 				System.out.println(inventoryVo);
 				if (logiVo.getEx_amount() <= inventoryVo.getAmount()) {
 					int result = inventoryService.reduce(logiVo);							
 				}
+			} else if (receiveCMD.equals("process")) {
+				System.out.println("process들어옴");
+				int result = inventoryService.processing(new ProcessingVo(logiVo, receiveFrom));
+			} else if (receiveCMD.equals("done")) {
+				System.out.println("done들어옴");
+				int result = inventoryService.processDone(logiVo);
 			}			
 		} catch (Exception e) {
 			e.printStackTrace();
