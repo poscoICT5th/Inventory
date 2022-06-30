@@ -209,4 +209,20 @@
     			lot_no = #{statusChangeLotno};
    		</foreach>
     </update>
+    
+    <update id='processing' parameterType="ProcessingVo">
+    		UPDATE Inventory
+    		SET
+    			state = #{state}    			
+    		WHERE
+    			lot_no = #{lot_no};
+    </update>
+    <update id='proccessDone' parameterType="LogiVo">
+    		UPDATE Inventory
+    		SET
+    			state = ""    			
+    		WHERE
+    			lot_no = #{lot_no};
+    </update>
+    
 </mapper>

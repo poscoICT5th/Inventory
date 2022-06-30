@@ -19,6 +19,7 @@ import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
 import Pack.vo.InventoryWarehouse;
 import Pack.vo.LogiVo;
+import Pack.vo.ProcessingVo;
 import Pack.vo.SendTraceDTO;
 import Pack.vo.StatusChangeInfo;
 import Pack.vo.TrendInfo;
@@ -141,5 +142,13 @@ public class InventoryService {
 
 	public int statusChange(StatusChangeInfo statusChangeInfo) {
 		return mapper.statusChange(statusChangeInfo);
+	}
+
+	public int processing(ProcessingVo processingVo) {
+		return mapper.processing(processingVo);
+	}
+
+	public int processDone(LogiVo logiVo) {
+		return mapper.processDone(logiVo);
 	}
 }
