@@ -77,8 +77,9 @@
 	</select>
 	
 	<select id="selectMap" resultType="Pack.vo.InventoryMap">
-		SELECT left(warehouse_code, 2) as warehouse_code_string, right(warehouse_code, 2) as warehouse_code_int, amount 
-		FROM Inventory;
+		SELECT substring(warehouse_code, 2, 1) as warehouse_code_string, right(warehouse_code, 2) as warehouse_code_int, amount 
+		FROM Inventory
+		WHERE location = #{location}
 	</select>
 	
     <delete id="delete" parameterType="String">

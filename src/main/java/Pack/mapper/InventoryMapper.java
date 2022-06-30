@@ -38,7 +38,7 @@ public interface InventoryMapper {
     
     List<InventoryVo> selectAmount();
     
-    List<InventoryMap> selectMap();
+    List<InventoryMap> selectMap(String location);
     
     int delete(String lotNo);
     
