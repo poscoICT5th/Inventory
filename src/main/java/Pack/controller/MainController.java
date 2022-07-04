@@ -22,6 +22,7 @@ import Pack.vo.InventoryAmount;
 import Pack.vo.InventoryCustomer;
 import Pack.vo.InventoryDeleteList;
 import Pack.vo.InventoryItemname;
+import Pack.vo.InventoryMap;
 import Pack.vo.InventoryProduceDTO;
 import Pack.vo.InventorySch;
 import Pack.vo.InventoryUpd;
@@ -76,7 +77,6 @@ public class MainController {
 	
 	@GetMapping("/warehouse/{warehouseCode}")
 	public List inventoryByWarehouse(@PathVariable("warehouseCode") String warehouseCode) {
-
 		System.out.println("inventoryWarehouse");
 		List<InventoryVo> inventoryWarehouse = inventoryService.selectWarehouse(warehouseCode);
 		System.out.println(inventoryWarehouse.size());
@@ -99,11 +99,19 @@ public class MainController {
 		return inventoryCustomer;
 	}
 	
-	@GetMapping("/map")	
-	public HashMap<String, Object> selectToMap() {
-		System.out.println("map data 요청");
-		HashMap result = inventoryService.selectToMap();
-		return result;
+//	@GetMapping("/map")	
+//	public HashMap<String, Object> selectToMap() {
+//		System.out.println("map data 요청");
+//		HashMap result = inventoryService.selectToMap();
+//		return result;
+//	}
+	
+	@GetMapping("/map/{location}")
+	public List inventoryMap(@PathVariable("location") String location) {
+		System.out.println("inventoryMap");
+		List<InventoryMap> inventoryMap = inventoryService.selectMap(location);
+		System.out.println(inventoryMap.size());
+		return inventoryMap;
 	}
 	
 	@GetMapping("/aging")
