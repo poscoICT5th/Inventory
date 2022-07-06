@@ -224,7 +224,7 @@
     		WHERE
     			lot_no = #{lot_no};
     </update>
-    <update id='proccessDone' parameterType="LogiVo">
+    <update id='processDone' parameterType="LogiVo">
     		UPDATE Inventory
     		SET
     			state = ""    			
