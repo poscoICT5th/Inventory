@@ -14,6 +14,8 @@ import lombok.ToString;
 @Getter
 @Setter
 public class LogiVo {
+	String instruction_no;
+	String status;
 	String lot_no;
 	String industry_family;
 	String stock_type;

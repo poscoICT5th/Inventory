@@ -86,7 +86,7 @@ public class InventoryService {
 	public int produce(InventoryProduceDTO inventoryProduceDTO) {
 		int result = mapper.produce(inventoryProduceDTO);
 		if (result > 1) {
-			rabbitTemplate.convertAndSend("posco", "import.Traceback.manufacture", new SendTraceDTO(inventoryProduceDTO));
+			rabbitTemplate.convertAndSend("posco", "inventory.Traceback.manufacture", new SendTraceDTO(inventoryProduceDTO));
 		}
 		return result;
 	}
@@ -146,7 +146,11 @@ public class InventoryService {
 	}
 
 	public int statusChange(StatusChangeInfo statusChangeInfo) {
-		return mapper.statusChange(statusChangeInfo);
+		int result = mapper.statusChange(statusChangeInfo);
+		if (result > 0) {
+			rabbitTemplate.convertAndSend("posco", "inventory.Traceback.update", statusChangeInfo);
+		}
+		return result;
 	}
 
 	public int processing(ProcessingVo processingVo) {
