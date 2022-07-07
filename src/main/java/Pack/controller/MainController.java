@@ -61,6 +61,14 @@ public class MainController {
 	    return inventoryList;
 	}
 	
+	@GetMapping("/lotno/{lot_no}")
+	public InventoryVo selectOneByLotno(@PathVariable String lot_no) {
+		System.out.println("inventorySelectOneByLotno");
+		InventoryVo inventoryList = inventoryService.selectByLotNo(lot_no);
+		System.out.println(inventoryList);
+		return inventoryList;
+	}
+	
 	@GetMapping("/search")
 	public List inventorySch(InventorySch inventorySch) {
 		System.out.println("inventorySearch");
@@ -158,7 +166,8 @@ public class MainController {
 		System.out.println(lotNo);
 		System.out.println(inventoryUpd);
 		int result = inventoryService.inventoryUpd(lotNo, inventoryUpd);
-		return result == 1 ? true : false;
+//		return result == 1 ? true : false;
+		return true;
 	}
 	
 

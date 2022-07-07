@@ -1,0 +1,9 @@
+= Inventory
+
+== Test조회
+
+include::{snippets}/test/curl-request.adoc[]
+include::{snippets}/test/http-request.adoc[]
+include::{snippets}/test/http-response.adoc[]
+include::{snippets}/test/httpie-request.adoc[]
+ 
