@@ -85,7 +85,7 @@ public class InventoryService {
 	
 	public int produce(InventoryProduceDTO inventoryProduceDTO) {
 		int result = mapper.produce(inventoryProduceDTO);
-		if (result > 1) {
+		if (result > 0) {
 			rabbitTemplate.convertAndSend("posco", "inventory.Traceback.manufacture", new SendTraceDTO(inventoryProduceDTO));
 		}
 		return result;
