@@ -18,7 +18,8 @@ public class SendTraceDTO {
 	String item_code;
 	int amount;
 	String stock_quality_status;
-	String stock_cause;
+	String status_cause;
+	String inventory_date;
 	List<InventoryProduceVo> consumed_infos;
 	
 	public SendTraceDTO(InventoryProduceDTO inventoryProduceDTO) {
@@ -27,6 +28,7 @@ public class SendTraceDTO {
 		this.item_name = newProduct.getItem_name();
 		this.item_code = newProduct.getItem_code();
 		this.amount = newProduct.getAmount();
+		this.inventory_date = newProduct.getInventory_date();
 		this.consumed_infos = inventoryProduceDTO.getConsumedProducts();
 	}
 }

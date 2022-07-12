@@ -10,6 +10,7 @@
 		select *, TIMESTAMPDIFF(MONTH, warehouse_date, now()) as fixed_month, datediff(now(), inventory_date) as warehouse_aging 
 		from Inventory
 		where lot_no=#{lot_no}
+		limit 1;
 	</select>
 	
 	<select id="selectSome" parameterType="Pack.vo.InventorySch" resultType="Pack.vo.InventoryVo">
