@@ -207,6 +207,19 @@
     	SELECT trend_idx, (UNIX_TIMESTAMP(date)* 1000) as date, inven_motor, inven_rotor, inven_strip, export_motor, export_rotor, export_strip FROM pscict_final.Trend;
     </select>
 
+    <select id='getTrendByYearMonth' parameterType= "String" resultType="TrendInfoByYM">
+    	select 
+    		count(*) as day, 
+    		sum(inven_motor) as sum_inven_motor, 
+    		sum(inven_rotor) as sum_inven_rotor,
+    		sum(inven_strip) as sum_inven_strip,
+    		sum(export_motor) as sum_export_motor, 
+    		sum(export_rotor) as sum_export_rotor, 
+    		sum(export_strip) as sum_export_strip
+   		from Trend 
+   		where date like concat(#{year},"-", #{month}, "-___________");
+    </select>
+
     <update id='statusChange' parameterType="StatusChangeInfo">
    		<foreach collection="statusChangeList" item="statusChangeLotno" index="index">
     		UPDATE Inventory

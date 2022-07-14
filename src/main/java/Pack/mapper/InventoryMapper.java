@@ -20,6 +20,7 @@ import Pack.vo.LogiVo;
 import Pack.vo.ProcessingVo;
 import Pack.vo.StatusChangeInfo;
 import Pack.vo.TrendInfo;
+import Pack.vo.TrendInfoByYM;
 
 @Repository
 @Mapper
@@ -67,5 +68,7 @@ public interface InventoryMapper {
 	int processing(ProcessingVo processingVo);
 
 	int processDone(LogiVo logiVo);
+
+	List<TrendInfoByYM> getTrendByYearMonth(String year, String month);
 
 }

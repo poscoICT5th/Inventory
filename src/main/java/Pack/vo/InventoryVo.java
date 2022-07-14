@@ -1,5 +1,6 @@
 package Pack.vo;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -28,4 +29,5 @@ public class InventoryVo {
 	String status_cause;
 	String inventory_date;
 	String warehouse_date;
+	
 }

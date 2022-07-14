@@ -24,6 +24,7 @@ import Pack.vo.ProcessingVo;
 import Pack.vo.SendTraceDTO;
 import Pack.vo.StatusChangeInfo;
 import Pack.vo.TrendInfo;
+import Pack.vo.TrendInfoByYM;
 
 @Service
 public class InventoryService {
@@ -159,5 +160,9 @@ public class InventoryService {
 
 	public int processDone(LogiVo logiVo) {
 		return mapper.processDone(logiVo);
+	}
+
+	public List<TrendInfoByYM> getTrendByYearMonth(String year, String month) {
+		return mapper.getTrendByYearMonth(year, month);
 	}
 }

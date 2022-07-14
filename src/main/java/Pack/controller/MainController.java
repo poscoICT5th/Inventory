@@ -28,9 +28,11 @@ import Pack.vo.InventorySch;
 import Pack.vo.InventoryUpd;
 import Pack.vo.InventoryVo;
 import Pack.vo.InventoryWarehouse;
+import Pack.vo.ResultDTO;
 import Pack.vo.StatusChangeInfo;
 import Pack.vo.TestVo;
 import Pack.vo.TrendInfo;
+import Pack.vo.TrendInfoByYM;
 
 @CrossOrigin("*")
 @RestController
@@ -64,9 +66,9 @@ public class MainController {
 	@GetMapping("/lotno/{lot_no}")
 	public InventoryVo selectOneByLotno(@PathVariable String lot_no) {
 		System.out.println("inventorySelectOneByLotno");
-		InventoryVo inventoryList = inventoryService.selectByLotNo(lot_no);
-		System.out.println(inventoryList);
-		return inventoryList;
+		InventoryVo inventoryitem = inventoryService.selectByLotNo(lot_no);
+		System.out.println(inventoryitem);
+		return inventoryitem;
 	}
 	
 	@GetMapping("/search")
@@ -83,8 +85,16 @@ public class MainController {
 		return inventoryService.getTrendInfo();
 	}
 	
+	@GetMapping("/trend/year/{year}/month/{month}")
+	public List<TrendInfoByYM> getTrendByYearMonth(@PathVariable String year, @PathVariable String month) {
+		System.out.println("trendby mon year");
+		System.out.println(year + " : " + month);
+		return inventoryService.getTrendByYearMonth(year, month);
+	}
+	
+	
 	@GetMapping("/warehouse/{warehouseCode}")
-	public List inventoryByWarehouse(@PathVariable("warehouseCode") String warehouseCode) {
+	public List<InventoryVo> inventoryByWarehouse(@PathVariable("warehouseCode") String warehouseCode) {
 		System.out.println("inventoryWarehouse");
 		List<InventoryVo> inventoryWarehouse = inventoryService.selectWarehouse(warehouseCode);
 		System.out.println(inventoryWarehouse.size());
@@ -92,7 +102,7 @@ public class MainController {
 	}
 	
 	@GetMapping("/inventory/{location}")
-	public List inventoryItemname(@PathVariable("location") String location) {
+	public List<InventoryItemname> inventoryItemname(@PathVariable("location") String location) {
 		System.out.println("inventoryItemnameLocation");
 		List<InventoryItemname> inventoryItemname = inventoryService.selectItemname(location);
 		System.out.println(inventoryItemname.size());
@@ -144,48 +154,47 @@ public class MainController {
 		List<InventoryVo> result = inventoryService.selectByLocAndWare(location, warehouseCode);
 		return result;
 	}
-
+	//
 	@DeleteMapping("/{lotNo}")
-	public boolean inventoryDel(@PathVariable("lotNo") String lotNo) {
+	public ResultDTO inventoryDel(@PathVariable("lotNo") String lotNo) {
 		System.out.println("delete");
 		System.out.println(lotNo);
 		int result = inventoryService.inventoryDel(lotNo);
-		return result == 1 ? true : false;
+		return new ResultDTO(result);
 	}
 	
 	@DeleteMapping("/")
-	public boolean inventoryDels(@RequestBody InventoryDeleteList inventoryDeleteList) {
+	public ResultDTO inventoryDels(@RequestBody InventoryDeleteList inventoryDeleteList) {
 		System.out.println("delete List");
 		System.out.println(inventoryDeleteList);
 		int result = inventoryService.inventoryDels(inventoryDeleteList);
-		return result == 1 ? true : false;
+		return new ResultDTO(result);
 	}
 	
 	@PutMapping("/{lotNo}")
-	public boolean inventoryUpd(@PathVariable("lotNo") String lotNo, @RequestBody InventoryUpd inventoryUpd) {
+	public ResultDTO inventoryUpd(@PathVariable("lotNo") String lotNo, @RequestBody InventoryUpd inventoryUpd) {
 		System.out.println(lotNo);
 		System.out.println(inventoryUpd);
 		int result = inventoryService.inventoryUpd(lotNo, inventoryUpd);
-//		return result == 1 ? true : false;
-		return true;
+		return new ResultDTO(result);
 	}
 	
 
 	@PostMapping("/produce")
-	public boolean inventoryProduce(@RequestBody InventoryProduceDTO data) {
+	public ResultDTO inventoryProduce(@RequestBody InventoryProduceDTO data) {
 //	public boolean inventoryMix(@RequestBody HashMap<String, Object> data) {
 		System.out.println("post 들어감");
 		System.out.println(data); 
 		int result = inventoryService.produce(data);
 //		return true;
-		return result==1?true:false;
+		return new ResultDTO(result);
 	}
 
 	@PutMapping("/statuschange")
-	public boolean statusChange(@RequestBody StatusChangeInfo statusChangeInfo) {
+	public ResultDTO statusChange(@RequestBody StatusChangeInfo statusChangeInfo) {
 		System.out.println("post 들어감");
 		System.out.println(statusChangeInfo); 
 		int result = inventoryService.statusChange(statusChangeInfo);
-		return result>0?true:false;
+		return new ResultDTO(result);
 	}
 }

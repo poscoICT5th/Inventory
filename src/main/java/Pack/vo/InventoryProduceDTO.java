@@ -9,6 +9,7 @@ import lombok.*;
 @ToString 
 @Getter
 @Setter
+@Builder
 public class InventoryProduceDTO {
 	List<InventoryProduceVo> consumedProducts;
 	InventoryDTO newProduct;
