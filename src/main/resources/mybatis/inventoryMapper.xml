@@ -3,7 +3,8 @@
 <mapper namespace="Pack.mapper.InventoryMapper">
 	<select id="selectAll"  resultType="Pack.vo.InventoryVo">
 		select *, TIMESTAMPDIFF(MONTH, warehouse_date, now()) as fixed_month, datediff(now(), inventory_date) as warehouse_aging 
-		from Inventory;
+		from Inventory
+		order by inventory_date desc;
 	</select>
 	
 	<select id="selectByLotNo" parameterType="String" resultType="Pack.vo.InventoryVo">
@@ -37,6 +38,7 @@
 	    	(width between #{min_width} and #{max_width}) and
 	    	(thickness between #{min_thickness} and #{max_thickness}) and
 	    	(height between #{min_height} and #{max_height})
+	    	order by inventory_date desc;
     </select>
     
     <select id="selectWarehouse"  resultType="Pack.vo.InventoryVo">
