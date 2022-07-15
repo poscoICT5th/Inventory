@@ -29,5 +29,5 @@ public class InventoryVo {
 	String status_cause;
 	String inventory_date;
 	String warehouse_date;
-	
+	int sum;
 }
