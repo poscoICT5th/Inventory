@@ -221,6 +221,22 @@
    		from Trend 
    		where date like concat(#{year},"-", #{month}, "-___________");
     </select>
+    
+    <select id='getTrendAll' parameterType= "String" resultType="TrendAll">
+		select 
+			count(*) as day, 
+			sum(inven_motor) as sum_inven_motor, 
+			sum(inven_rotor) as sum_inven_rotor,
+			sum(inven_strip) as sum_inven_strip,
+			sum(export_motor) as sum_export_motor, 
+			sum(export_rotor) as sum_export_rotor, 
+			sum(export_strip) as sum_export_strip,
+		    substring(date, 1, 4) as year,
+		    substring(date, 6, 2) as month
+		from Trend 
+		group by substring(date, 1, 4), substring(date, 6, 2)
+		order by substring(date, 1, 4) asc, substring(date, 6, 2) asc;
+    </select>
 
     <update id='statusChange' parameterType="StatusChangeInfo">
    		<foreach collection="statusChangeList" item="statusChangeLotno" index="index">

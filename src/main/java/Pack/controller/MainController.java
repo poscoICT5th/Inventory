@@ -31,6 +31,7 @@ import Pack.vo.InventoryWarehouse;
 import Pack.vo.ResultDTO;
 import Pack.vo.StatusChangeInfo;
 import Pack.vo.TestVo;
+import Pack.vo.TrendAll;
 import Pack.vo.TrendInfo;
 import Pack.vo.TrendInfoByYM;
 
@@ -90,6 +91,12 @@ public class MainController {
 		System.out.println("trendby mon year");
 		System.out.println(year + " : " + month);
 		return inventoryService.getTrendByYearMonth(year, month);
+	}
+	
+	@GetMapping("/trendAll")
+	public List<TrendAll> getTrendAll() {
+		System.out.println("trendAll");
+		return inventoryService.getTrendAll();
 	}
 	
 	
