@@ -31,8 +31,8 @@
     		<if test='item_name != null and item_name neq "전체보기"'>item_name=#{item_name} and</if>
     		<if test='unit != null and unit neq "전체보기"'>unit=#{unit} and</if>
     		<if test='customer != null and customer neq "전체보기"'>customer like CONCAT('%',#{customer},'%') and</if>
-    		<if test='inventory_date != null and inventory_date neq "전체보기"'>inventory_date=#{inventory_date} and</if>
-    		<if test='warehouse_date != null and warehouse_date neq "전체보기"'>warehouse_date=#{warehouse_date} and</if>
+    		<if test='inventory_date != null and inventory_date neq "전체보기"'>inventory_date like CONCAT('%',#{inventory_date},'%') and</if>
+    		<if test='warehouse_date != null and warehouse_date neq "전체보기"'>warehouse_date like CONCAT('%',#{warehouse_date},'%') and</if>
 	    	(amount between #{min_amount} and #{max_amount}) and
 	    	(weight between #{min_weight} and #{max_weight}) and
 	    	(width between #{min_width} and #{max_width}) and
@@ -120,8 +120,8 @@
 			width = #{width},
 			thickness = #{thickness},
 			height = #{height},
-			inventory_date = #{inventory_date},
-			warehouse_date = #{warehouse_date}
+			inventory_date like CONCAT('%',#{inventory_date},'%'),
+			warehouse_date like CONCAT('%',#{warehouse_date},'%')
     	WHERE
     		lot_no = #{lot_no}
     </update>
@@ -148,8 +148,8 @@
         	#{customer},
         	NULL,
         	NULL,
-        	date_format(now(), "%Y-%m-%d %H:%i:%s"),
-        	date_format(now(), "%Y-%m-%d %H:%i:%s")
+        	now(),
+        	now()
         );
     </insert>
     
