@@ -87,8 +87,8 @@ public class InventoryDTO {
 		this.stock_quality_status = stock_quality_status;
 		this.status_cause = status_cause;
 		this.sum = sum;
-		this.inventory_date = new SimpleDateFormat("YYYY-MM-dd").format(curTime);;
-		this.warehouse_date = new SimpleDateFormat("YYYY-MM-dd").format(curTime);;
+		this.inventory_date = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(curTime);;
+		this.warehouse_date = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(curTime);;
 		this.fixed_month = fixed_month;
 		this.warehouse_aging = warehouse_aging;
 	}

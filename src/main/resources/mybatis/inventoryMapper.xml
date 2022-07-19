@@ -148,8 +148,8 @@
         	#{customer},
         	NULL,
         	NULL,
-        	date_format(now(), "%Y-%m-%d"),
-        	date_format(now(), "%Y-%m-%d")
+        	date_format(now(), "%Y-%m-%d %H:%i:%s"),
+        	date_format(now(), "%Y-%m-%d %H:%i:%s")
         );
     </insert>
     
@@ -200,8 +200,8 @@
 	        	#{newProduct.customer},
 	        	NULL,
 	        	NULL,
-	        	date_format(now(), "%Y-%m-%d"),
-	        	date_format(now(), "%Y-%m-%d")
+	        	date_format(now(), "%Y-%m-%d %H:%i:%s"),
+	        	date_format(now(), "%Y-%m-%d %H:%i:%s")
         	);
     </update>
 
